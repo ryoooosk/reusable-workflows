@@ -3,10 +3,6 @@ name: Pull Request Lead Time
 
 on:
   workflow_call:
-    secrets:
-      GITHUB_TOKEN:
-        required: true
-        description: Token to run the workflow
   pull_request:
     branches:
       - main
