@@ -15,11 +15,6 @@ defaults:
   run:
     shell: bash
 
-# 多重起動の防止
-concurrency:
-  group: ${{ github.workflow }}-${{ github.actor }}
-  cancel-in-progress: true
-
 jobs:
   actions-lint:
     runs-on: ubuntu-latest
