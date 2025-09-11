@@ -7,6 +7,12 @@ on:
       GITHUB_TOKEN:
         required: true
         description: Token to run the workflow
+  pull_request:
+    types:
+      - opened
+      - synchronize
+    paths:
+      - ".github/workflows/**.yml"
 
 # パイプ処理中のエラーをキャッチするために明示的にシェル指定
 defaults:

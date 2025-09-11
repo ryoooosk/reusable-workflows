@@ -6,6 +6,8 @@ on:
       GITHUB_TOKEN:
         required: true
         description: Token to run the workflow
+  pull_request:
+    types: [opened]
 
 permissions:
   pull-requests: write
