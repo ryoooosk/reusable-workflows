@@ -3,14 +3,11 @@ name: Add Reviewer to Dependabot PRs
 on:
   workflow_call:
     secrets:
-      GITHUB_TOKEN:
+      GH_TOKEN:
         required: true
         description: Token to run the workflow
   pull_request:
     types: [opened]
-
-permissions:
-  pull-requests: write
 
 jobs:
   add-reviewer:
@@ -26,6 +23,6 @@ jobs:
     env:
       PR_NUMBER: ${{ github.event.number }}
       # gh cli require GH_TOKEN variable
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
       REVIEWER: ${{ github.repository_owner }}
     

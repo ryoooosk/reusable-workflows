@@ -4,7 +4,7 @@ name: Auto merge dependabot pull requests
 on:
   workflow_call:
     secrets:
-      GITHUB_TOKEN:
+      GH_TOKEN:
         required: true
         description: Token to run the workflow
   pull_request:
