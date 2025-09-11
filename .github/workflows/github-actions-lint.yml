@@ -1,0 +1,28 @@
+name: GitHub Actions lint
+# GitHub Actionsのワークフロー定義ファイルの文法チェックを行う
+
+on:
+  workflow_call:
+    secrets:
+      GITHUB_TOKEN:
+        required: true
+        description: Token to run the workflow
+
+# パイプ処理中のエラーをキャッチするために明示的にシェル指定
+defaults:
+  run:
+    shell: bash
+
+# 多重起動の防止
+concurrency:
+  group: ${{ github.workflow }}-${{ github.actor }}
+  cancel-in-progress: true
+
+jobs:
+  actions-lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - run: |
+          docker run --rm -v "$(pwd):$(pwd)" -w "$(pwd)" rhysd/actionlint:latest
