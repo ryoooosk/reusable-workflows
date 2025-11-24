@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Dependabot metadata
         id: meta
         uses: dependabot/fetch-metadata@v2 ## dependabotの更新内容を取得（https://github.com/dependabot/fetch-metadata）
