@@ -7,12 +7,14 @@ on:
         required: true
         description: Token to run the workflow
   pull_request:
-    types: [opened]
+    types: [opened, synchronize]
 
 jobs:
-  add-reviewer:
+  add-reviewer-pr:
+    if: github.event_name == 'pull_request' && github.event.pull_request.user.login == 'dependabot[bot]'
     runs-on: ubuntu-latest
-    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    permissions:
+      pull-requests: write
     defaults:
       run:
         shell: bash
@@ -22,7 +24,20 @@ jobs:
         run: gh pr edit "$PR_NUMBER" --add-reviewer "$REVIEWER"
     env:
       PR_NUMBER: ${{ github.event.number }}
-      # gh cli require GH_TOKEN variable
+      GH_TOKEN: ${{ github.token }}
+      REVIEWER: ${{ github.repository_owner }}
+
+  add-reviewer-wf:
+    if: github.event_name == 'workflow_call' && github.event.pull_request.user.login == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v5
+      - name: Add Reviewer
+        run: gh pr edit "$PR_NUMBER" --add-reviewer "$REVIEWER"
+    env:
+      PR_NUMBER: ${{ github.event.number }}
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
       REVIEWER: ${{ github.repository_owner }}
-    
