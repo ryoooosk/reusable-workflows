@@ -19,7 +19,7 @@ jobs:
       contents: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Dependabot metadata
         id: meta
         uses: dependabot/fetch-metadata@v3 ## dependabotの更新内容を取得（https://github.com/dependabot/fetch-metadata）
@@ -38,7 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Dependabot metadata
         id: meta
         uses: dependabot/fetch-metadata@v3 ## dependabotの更新内容を取得（https://github.com/dependabot/fetch-metadata）
