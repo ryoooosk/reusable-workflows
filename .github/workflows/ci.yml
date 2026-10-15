@@ -12,3 +12,10 @@ jobs:
 
   secret-scan:
     uses: ./.github/workflows/secret-scan.yml
+
+  dependabot-auto-merge:
+    needs: [github-actions-lint, secret-scan]
+    uses: ./.github/workflows/dependabot-auto-merge.yml
+    permissions:
+      contents: write
+      pull-requests: write
