@@ -19,11 +19,11 @@ jobs:
       run:
         shell: bash
     steps:
-      - uses: actions/checkout@v7
       - name: Add Reviewer
         run: gh pr edit "$PR_NUMBER" --add-reviewer "$REVIEWER"
     env:
       PR_NUMBER: ${{ github.event.number }}
+      GH_REPO: ${{ github.repository }}
       GH_TOKEN: ${{ github.token }}
       REVIEWER: ${{ github.repository_owner }}
 
@@ -34,10 +34,10 @@ jobs:
       run:
         shell: bash
     steps:
-      - uses: actions/checkout@v7
       - name: Add Reviewer
         run: gh pr edit "$PR_NUMBER" --add-reviewer "$REVIEWER"
     env:
       PR_NUMBER: ${{ github.event.number }}
+      GH_REPO: ${{ github.repository }}
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
       REVIEWER: ${{ github.repository_owner }}
